@@ -1,10 +1,14 @@
 package com.zhu.lazytemp.bean;
+
+import java.io.Serializable;
+
 /**
  * 音频文件信息
  * @author zhu
  * @since 2014-06-20 23:03:44
  */
-public class MediaInfo {
+public class MediaInfo implements Serializable  {
+	private static final long serialVersionUID = 1L;
 	/** 歌曲名 */
 	private String title;
 	/** 专辑名*/
