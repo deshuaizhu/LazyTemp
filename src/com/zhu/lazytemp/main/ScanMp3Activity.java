@@ -24,6 +24,7 @@ import com.zhu.lazytemp.adapter.Mp3FileAdapter;
 import com.zhu.lazytemp.bean.MediaInfo;
 import com.zhu.lazytemp.play.IMediaService;
 import com.zhu.lazytemp.play.MediaService;
+import com.zhu.lazytemp.play.activity.MediaPlayActivity;
 /**
  * 扫描手机中的音频文件
  * @author zhu
@@ -41,31 +42,14 @@ public class ScanMp3Activity extends Activity implements OnClickListener, OnItem
 	private ArrayList<MediaInfo> mediaList;
 	/** 音频列表适配器 */
 	private Mp3FileAdapter adapter;
-	/** 音频服务连接类 */
-	private MediaServerConnection conn;
-	/** 音频服务接口类 */
-	private IMediaService mediaService;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_scanmp3);
-		bindMediaService();
 		findViews();
 		initData();
 		
 	}
-	/**
-	 * 绑定音频服务
-	 */
-	private void bindMediaService() {
-		if(conn == null)
-			conn = new MediaServerConnection();
-		bindService(new Intent(getApplicationContext(), MediaService.class), 
-					conn, 
-					Context.BIND_AUTO_CREATE);
-		
-	}
-
 	/**
 	 * 初始化数据
 	 */
@@ -132,36 +116,7 @@ public class ScanMp3Activity extends Activity implements OnClickListener, OnItem
 		minute = minute - hour * 60;
 		return String.format("%02d:%02d:%02d", hour, minute, second);
 	}
-	/**
-	 * 音频服务连接结果回调
-	 * @author zhu
-	 * @since 2014-06-22 11:15:19
-	 */
-	private class MediaServerConnection implements ServiceConnection {
-
-		@Override
-		public void onServiceConnected(ComponentName name, IBinder service) {
-			mediaService = (IMediaService) service;
-		}
-
-		@Override
-		public void onServiceDisconnected(ComponentName name) {
-			// TODO Auto-generated method stub
-			
-		}
-		
-	}
 	
-	@Override
-	protected void onDestroy() {
-		if(conn!=null){
-			unbindService(conn);
-			conn = null;
-		}
-		
-		super.onDestroy();
-	}
-
 	@Override
 	public void onClick(View v) {
 		
@@ -178,12 +133,10 @@ public class ScanMp3Activity extends Activity implements OnClickListener, OnItem
 	}
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		
 		MediaInfo mediaInfo = mediaList.get(position);
-		if(mediaService!=null){
-			mediaService.startPlay(mediaInfo);
-		}else {
-			Toast.makeText(getApplicationContext(), "service error!", 1).show();
-		}
+		//跳转到播放器进行播放
+		Intent intent = new Intent(getApplicationContext(), MediaPlayActivity.class);
+		intent.putExtra("mediainfo", mediaInfo);
+		startActivity(intent );
 	}
 }
