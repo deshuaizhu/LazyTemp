@@ -2,8 +2,10 @@ package com.zhu.lazytemp.play;
 
 import android.app.Service;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnPreparedListener;
+import android.media.MediaPlayer.OnSeekCompleteListener;
 import android.os.Binder;
 import android.os.IBinder;
 import android.util.Log;
@@ -28,13 +30,13 @@ public class MediaService extends Service implements OnPreparedListener {
 	public void onCreate() {
 		super.onCreate();
 		mediaPlayer = new MediaPlayer();
+		
 	}
 	/**
 	 * 开始播放
 	 * @param mediaInfo 音频信息
 	 */
 	private void play(MediaInfo mediaInfo){
-		mediaPlayer.reset();
 		try {
 			mediaPlayer.setDataSource(mediaInfo.getUrl());
 			mediaPlayer.prepareAsync();
@@ -44,23 +46,34 @@ public class MediaService extends Service implements OnPreparedListener {
 		}
 	}
 	/**
-	 * 暂停播放
+	 * 暂停or播放
 	 */
-	private void pauseOrResume(){
+	private void playOr(MediaInfo mediaInfo){
 		if(mediaPlayer.isPlaying()){
 			mediaPlayer.pause();
+		}else if(mediaPlayer.getCurrentPosition()>1){
+			mediaPlayer.seekTo(mediaPlayer.getCurrentPosition());
+			mediaPlayer.start();
+		}else{
+			play(mediaInfo);
 		}
+	}
+	/**
+	 * seek to
+	 * @param pos
+	 */
+	private void seekToPos(int pos){
+		mediaPlayer.seekTo(pos);
 	}
 	class MyBinder extends Binder implements IMediaService{
 
 		@Override
-		public void startPlay(MediaInfo mediaInfo) {
-			play(mediaInfo);
+		public void playOrPause(MediaInfo mediaInfo) {
+			playOr(mediaInfo);
 		}
-
+		
 		@Override
 		public void pause() {
-			pauseOrResume();
 			
 		}
 
@@ -69,7 +82,15 @@ public class MediaService extends Service implements OnPreparedListener {
 			// TODO Auto-generated method stub
 			
 		}
+
+		@Override
+		public void seekTo(int pos) {
+			seekToPos(pos);
+			
+		}
+
 		
+
 	}
 	@Override
 	public void onPrepared(MediaPlayer mp) {

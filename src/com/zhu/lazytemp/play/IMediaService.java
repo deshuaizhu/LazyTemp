@@ -11,7 +11,7 @@ public interface IMediaService {
 	/**
 	 * 开始播放
 	 */
-	void startPlay(MediaInfo mediaInfo);
+	void playOrPause(MediaInfo mediaInfo);
 	/**
 	 * 暂停播放
 	 */
@@ -20,4 +20,8 @@ public interface IMediaService {
 	 * 停止播放
 	 */
 	void stop();
+	/**
+	 * seekto
+	 */
+	void seekTo(int pos);
 }
