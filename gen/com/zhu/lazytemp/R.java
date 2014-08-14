@@ -10,35 +10,120 @@ package com.zhu.lazytemp;
 public final class R {
     public static final class attr {
     }
+    public static final class color {
+        public static final int app_background_color=0x7f040016;
+        public static final int black=0x7f040001;
+        public static final int black_slight=0x7f04002e;
+        public static final int blue_ads=0x7f040023;
+        public static final int btn_grey_bg=0x7f040005;
+        public static final int btn_grey_pressed_bg=0x7f040006;
+        public static final int choose_lables_bg=0x7f040014;
+        public static final int comment_name_color=0x7f040025;
+        public static final int deep_green=0x7f040012;
+        public static final int dialog_title_bg=0x7f040018;
+        public static final int divider_line=0x7f04001c;
+        public static final int green=0x7f040010;
+        public static final int grey=0x7f040003;
+        public static final int light_black=0x7f040002;
+        public static final int light_grey=0x7f040004;
+        public static final int line_green=0x7f04000d;
+        public static final int line_grey=0x7f04000c;
+        public static final int line_grey_bg=0x7f040007;
+        public static final int local_audio_cancle_bg=0x7f04002a;
+        public static final int local_audio_cancle_bg_press=0x7f04002b;
+        public static final int local_audio_cancle_txt=0x7f040029;
+        public static final int local_audio_item_click=0x7f040026;
+        public static final int local_audio_item_nor=0x7f040027;
+        public static final int local_audio_item_split=0x7f040028;
+        public static final int mystory_edit_dialog_textcolor=0x7f040024;
+        public static final int normal_text_bg=0x7f04000f;
+        public static final int normal_text_grey=0x7f04000b;
+        public static final int player_grey=0x7f040009;
+        public static final int protocol=0x7f04001d;
+        public static final int publish_textcolor=0x7f04002d;
+        public static final int radio_button_color=0x7f040015;
+        public static final int record_text_color=0x7f04001a;
+        public static final int seekbar_grey=0x7f04000a;
+        public static final int select_text_bg=0x7f04000e;
+        public static final int send_gray=0x7f04001e;
+        public static final int split_line=0x7f040017;
+        public static final int start_record_color=0x7f040019;
+        public static final int tab_button_nor=0x7f04001f;
+        public static final int tab_button_nor_textcolor=0x7f040021;
+        public static final int tab_button_select=0x7f040020;
+        public static final int tab_button_select_textcolor=0x7f040022;
+        public static final int tab_green=0x7f040013;
+        public static final int tab_xian=0x7f04002c;
+        public static final int text_grey=0x7f040008;
+        public static final int transcribe_green=0x7f040011;
+        public static final int translucent_background=0x7f04001b;
+        public static final int white=0x7f040000;
+    }
     public static final class drawable {
         public static final int ic_launcher=0x7f020000;
-        public static final int main_item_bg=0x7f020001;
+        public static final int last_song=0x7f020001;
+        public static final int last_song_pressed=0x7f020002;
+        public static final int last_song_selector=0x7f020003;
+        public static final int loop=0x7f020004;
+        public static final int main_item_bg=0x7f020005;
+        public static final int next_song=0x7f020006;
+        public static final int next_song_pressed=0x7f020007;
+        public static final int next_song_selector=0x7f020008;
+        public static final int pause_play_selector=0x7f020009;
+        public static final int pause_pressed=0x7f02000a;
+        public static final int progress_bg_grey=0x7f02000b;
+        public static final int progress_green=0x7f02000c;
+        public static final int progress_seekbar=0x7f02000d;
+        public static final int progress_thumb=0x7f02000e;
+        public static final int suspend=0x7f02000f;
+        public static final int timing_normal=0x7f020010;
     }
     public static final class id {
-        public static final int lv=0x7f070000;
-        public static final int lv_showmp3=0x7f070001;
-        public static final int main_tv_title=0x7f070005;
-        public static final int menu_settings=0x7f070008;
-        public static final int tv_center=0x7f070003;
-        public static final int tv_left=0x7f070002;
-        public static final int tv_name=0x7f070006;
-        public static final int tv_right=0x7f070004;
-        public static final int tv_time=0x7f070007;
+        public static final int btn_pause=0x7f08000b;
+        public static final int btn_play=0x7f08000a;
+        public static final int btn_play_area=0x7f080008;
+        public static final int btn_stop=0x7f08000c;
+        public static final int content_viewpager=0x7f080002;
+        public static final int ctrl_next=0x7f080018;
+        public static final int ctrl_pause_play=0x7f080017;
+        public static final int ctrl_previous=0x7f080016;
+        public static final int lv=0x7f080000;
+        public static final int lv_showmp3=0x7f08000d;
+        public static final int main_tv_title=0x7f080011;
+        public static final int menu_settings=0x7f08001a;
+        public static final int play_mode=0x7f080015;
+        public static final int player_layout=0x7f080014;
+        public static final int point_group=0x7f080003;
+        public static final int seeker=0x7f080009;
+        public static final int story_audience_amount=0x7f080007;
+        public static final int story_info=0x7f080004;
+        public static final int story_teller=0x7f080006;
+        public static final int story_title=0x7f080005;
+        public static final int timer=0x7f080019;
+        public static final int tv_center=0x7f08000f;
+        public static final int tv_left=0x7f08000e;
+        public static final int tv_name=0x7f080012;
+        public static final int tv_right=0x7f080010;
+        public static final int tv_time=0x7f080013;
+        public static final int viewpager_area=0x7f080001;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int activity_scanmp3=0x7f030001;
-        public static final int app_view_top=0x7f030002;
-        public static final int item_index_list=0x7f030003;
-        public static final int item_mp3file_list=0x7f030004;
+        public static final int activity_play=0x7f030001;
+        public static final int activity_play2=0x7f030002;
+        public static final int activity_scanmp3=0x7f030003;
+        public static final int app_view_top=0x7f030004;
+        public static final int item_index_list=0x7f030005;
+        public static final int item_mp3file_list=0x7f030006;
+        public static final int player_layout=0x7f030007;
     }
     public static final class menu {
-        public static final int activity_main=0x7f060000;
+        public static final int activity_main=0x7f070000;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int hello_world=0x7f040001;
-        public static final int menu_settings=0x7f040002;
+        public static final int app_name=0x7f050000;
+        public static final int hello_world=0x7f050001;
+        public static final int menu_settings=0x7f050002;
     }
     public static final class style {
         /** 
@@ -51,10 +136,10 @@ public final class R {
             backward-compatibility can go here.
         
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f060001;
     }
 }

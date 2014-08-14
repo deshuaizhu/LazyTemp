@@ -11,15 +11,36 @@ public interface IMediaService {
 	/**
 	 * 开始播放
 	 */
-	void playOrPause(MediaInfo mediaInfo);
+	void play(MediaInfo mediaInfo);
 	/**
 	 * 暂停播放
 	 */
 	void pause();
+	
+	/**
+	 * 继续播放
+	 */
+	void resume();
 	/**
 	 * 停止播放
 	 */
 	void stop();
+	/**
+	 * 判断是否正在播放
+	 * @return
+	 */
+	boolean isPlaying();
+	
+	/**
+	 * 获取当前位置
+	 * @return
+	 */
+	int getCurPos();
+	/**
+	 * 获取总长度
+	 * @return
+	 */
+	int getDur();
 	/**
 	 * seekto
 	 */

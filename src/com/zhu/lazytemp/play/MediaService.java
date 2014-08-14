@@ -37,56 +37,125 @@ public class MediaService extends Service implements OnPreparedListener {
 	 * @param mediaInfo 音频信息
 	 */
 	private void play(MediaInfo mediaInfo){
-		try {
-			mediaPlayer.setDataSource(mediaInfo.getUrl());
-			mediaPlayer.prepareAsync();
-			mediaPlayer.setOnPreparedListener(this);
-		} catch (Exception e) {
-			Log.e(TAG, "播放失败！");
+		if(mediaPlayer == null){
+			mediaPlayer = new MediaPlayer();
+		}
+		if(mediaInfo!=null){
+			mediaPlayer.reset();
+			try {
+				mediaPlayer.setDataSource(mediaInfo.getUrl());
+				mediaPlayer.prepareAsync();
+				mediaPlayer.setOnPreparedListener(this);
+			} catch (Exception e) {
+				Log.e(TAG, "播放失败！");
+			}
 		}
 	}
 	/**
-	 * 暂停or播放
+	 * 暂停
 	 */
-	private void playOr(MediaInfo mediaInfo){
-		if(mediaPlayer.isPlaying()){
+	private void pause(){
+		if(mediaPlayer!=null){
 			mediaPlayer.pause();
-		}else if(mediaPlayer.getCurrentPosition()>1){
-			mediaPlayer.seekTo(mediaPlayer.getCurrentPosition());
-			mediaPlayer.start();
-		}else{
-			play(mediaInfo);
 		}
+	}
+	/**
+	 * 继续播放
+	 */
+	private void resume(){
+		if(mediaPlayer!=null){
+			mediaPlayer.start();
+		}
+	}
+	/**
+	 * 停止播放
+	 */
+	private void stop(){
+		if(mediaPlayer!=null){
+			mediaPlayer.release();
+			mediaPlayer = null;
+		}
+	}
+	/**
+	 * 返回媒体总长度
+	 * @return
+	 */
+	private int getDuration(){
+		if(mediaPlayer!=null){
+			return mediaPlayer.getDuration();
+		}
+		return -1;
+	}
+	
+	/**
+	 * 返回当前正在播放的位置
+	 * @return
+	 */
+	private int getCurPosition(){
+		if(mediaPlayer!=null){
+			return mediaPlayer.getCurrentPosition();
+		}
+		return -1;
 	}
 	/**
 	 * seek to
 	 * @param pos
 	 */
 	private void seekToPos(int pos){
-		mediaPlayer.seekTo(pos);
+		if(mediaPlayer!=null){
+			mediaPlayer.seekTo(pos);
+		}
 	}
+	
+	
+	/**
+	 * 数据传输介质
+	 * @author DeshuaiZhu
+	 *
+	 */
 	class MyBinder extends Binder implements IMediaService{
 
 		@Override
-		public void playOrPause(MediaInfo mediaInfo) {
-			playOr(mediaInfo);
-		}
-		
-		@Override
 		public void pause() {
-			
+			MediaService.this.pause();
 		}
 
 		@Override
 		public void stop() {
-			// TODO Auto-generated method stub
-			
+			MediaService.this.stop();
 		}
 
 		@Override
 		public void seekTo(int pos) {
 			seekToPos(pos);
 			
+		}
+
+		@Override
+		public void play(MediaInfo mediaInfo) {
+			
+			MediaService.this.play(mediaInfo);
+			
+		}
+
+		@Override
+		public void resume() {
+			MediaService.this.resume();
+		}
+
+		@Override
+		public boolean isPlaying() {
+			return mediaPlayer.isPlaying();
+		}
+
+		@Override
+		public int getCurPos() {
+			return MediaService.this.getCurPosition();
+		}
+
+		@Override
+		public int getDur() {
+			return MediaService.this.getDuration();
 		}
 
 		
@@ -98,8 +167,10 @@ public class MediaService extends Service implements OnPreparedListener {
 	}
 	@Override
 	public void onDestroy() {
-		if(mediaPlayer.isPlaying()){
-			mediaPlayer.stop();
+		if(mediaPlayer!=null){
+			 if(mediaPlayer.isPlaying()){
+				 mediaPlayer.stop();
+			 }
 			mediaPlayer.release();
 		}
 		super.onDestroy();

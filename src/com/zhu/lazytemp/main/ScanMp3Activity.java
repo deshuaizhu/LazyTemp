@@ -82,21 +82,27 @@ public class ScanMp3Activity extends Activity implements OnClickListener, OnItem
 				MediaStore.Audio.Media.DISPLAY_NAME,
 				MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.DURATION,
 				MediaStore.Audio.Media.DATE_MODIFIED };
-		Cursor cursor = getContentResolver().query(
-				MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
-				str,
-				MediaStore.Audio.Media.MIME_TYPE + "=? or "
-						+ MediaStore.Audio.Media.MIME_TYPE + "=?",
-				new String[] { "audio/mpeg", "audio/x-wav" },
+		Cursor cursor = null;
+		try{
+			 cursor = getContentResolver().query(
+					MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
+					str,
+					MediaStore.Audio.Media.MIME_TYPE + "=? or "
+							+ MediaStore.Audio.Media.MIME_TYPE + "=?",
+							new String[] { "audio/mpeg", "audio/x-wav" },
 //				MediaStore.Audio.Media.MIME_TYPE + "=?",
 //				new String[] { "audio/mpeg"},
-				MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
-		while (cursor.moveToNext()) {
+							MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
+			while (cursor.moveToNext()) {
 				MediaInfo mediaInfo = new MediaInfo();
 				mediaInfo.setTitle(cursor.getString(1));
 				mediaInfo.setUrl(cursor.getString(2));
 				mediaInfo.setDuration(toTime(cursor.getInt(3)));
 				mediaList.add(mediaInfo);
+			}
+		}finally{
+			if(cursor!=null)
+				cursor.close();
 		}
 
 	}

@@ -51,7 +51,7 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:scaleType="centerInside"
-            android:src="@drawable/play_song_selector" />
+            />
 
         <ImageView
             android:id="@+id/ctrl_next"

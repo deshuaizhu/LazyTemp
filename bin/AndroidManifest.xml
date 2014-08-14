@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <application
         android:name=".LazyTempApplication"
@@ -25,7 +26,8 @@
         </activity>
         <!-- 扫描MP3 -->
         <activity android:name="com.zhu.lazytemp.main.ScanMp3Activity"></activity>
-        
+         <!-- 音频播放页面 -->
+        <activity android:name="com.zhu.lazytemp.play.activity.MediaPlayActivity"></activity>
         <!-- 音频播放服务 -->
         <service android:name="com.zhu.lazytemp.play.MediaService"></service>
     </application>
