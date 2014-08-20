@@ -207,10 +207,19 @@ public class MediaPlayActivity extends Activity implements OnClickListener, OnSe
 	}
 	
 	@Override
+	protected void onStop() {
+		//界面隐藏后要停掉更新seekbar
+		if(scheduleAtFixedRate!=null){
+			if(!scheduleAtFixedRate.isCancelled()){
+				scheduleAtFixedRate.cancel(true);
+			}
+			scheduleAtFixedRate = null;
+		}
+		super.onStop();
+	}
+	
+	@Override
 	protected void onDestroy() {
-//		if(scheduleAtFixedRate!=null){
-//			scheduleAtFixedRate.cancel(true);
-//		}
 		if(conn!=null){
 			unbindService(conn);
 			conn = null;
