@@ -57,6 +57,8 @@ public class MediaPlayActivity extends Activity implements OnClickListener, OnSe
 	/** 用于更新进度条的handler*/
 	private Handler handler;
 	private ScheduledFuture<?> scheduleAtFixedRate;
+	/** 当前进度 */
+	private int mProcess;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -83,7 +85,7 @@ public class MediaPlayActivity extends Activity implements OnClickListener, OnSe
 		handler = new Handler(){
 			@Override
 			public void handleMessage(Message msg) {
-				if(msg.what == 0){
+				if(msg.what == 0 && !sk_process.isPressed()){
 					long pos = sk_process.getMax() * mediaService.getCurPos() / mediaService.getDur();  
 					sk_process.setProgress((int)pos);
 				}
@@ -110,7 +112,7 @@ public class MediaPlayActivity extends Activity implements OnClickListener, OnSe
 		btn_stop.setOnClickListener(this);
 		
 		tv_back.setOnClickListener(this);
-//		sk_process.setOnSeekBarChangeListener(this);
+		sk_process.setOnSeekBarChangeListener(this);
 	}
 	/**
 	 * 查找控件id
@@ -231,8 +233,7 @@ public class MediaPlayActivity extends Activity implements OnClickListener, OnSe
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-//		mediaService.seekTo(progress);
-		
+		this.mProcess = seekBar.getProgress()*mediaService.getDur()/seekBar.getMax();
 	}
 
 	@Override
@@ -243,7 +244,7 @@ public class MediaPlayActivity extends Activity implements OnClickListener, OnSe
 
 	@Override
 	public void onStopTrackingTouch(SeekBar seekBar) {
-		// TODO Auto-generated method stub
+		mediaService.seekTo(this.mProcess);
 		
 	}
 }

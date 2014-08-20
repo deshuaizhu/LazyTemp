@@ -79,7 +79,7 @@ public class ScanMp3Activity extends Activity implements OnClickListener, OnItem
 	private void getAudioListFromSDCard() {
 		mediaList.clear();
 		String str[] = { MediaStore.Audio.Media._ID,
-				MediaStore.Audio.Media.DISPLAY_NAME,
+				MediaStore.Audio.Media.TITLE,
 				MediaStore.Audio.Media.DATA, MediaStore.Audio.Media.DURATION,
 				MediaStore.Audio.Media.DATE_MODIFIED };
 		Cursor cursor = null;
