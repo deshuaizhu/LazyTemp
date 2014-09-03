@@ -8,7 +8,10 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.autofocus"/>
     <application
         android:name=".LazyTempApplication"
         android:allowBackup="true"
@@ -28,6 +31,8 @@
         <activity android:name="com.zhu.lazytemp.main.ScanMp3Activity"></activity>
          <!-- 音频播放页面 -->
         <activity android:name="com.zhu.lazytemp.play.activity.MediaPlayActivity"></activity>
+        <!--打开闪光灯-->
+        <activity android:name=".main.FlashLightActivity"></activity>
         <!-- 音频播放服务 -->
         <service android:name="com.zhu.lazytemp.play.MediaService"></service>
     </application>

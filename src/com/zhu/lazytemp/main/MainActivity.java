@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 	 * 初始化数据
 	 */
 	private void initData() {
-		data = new String[]{"ViewPager动态增删","扫描手机中音频文件"};
+		data = new String[]{"ViewPager动态增删","扫描手机中音频文件","手电筒"};
 		adapter = new IndexDataAdapter(this,data);
 		lv.setAdapter(adapter);
 		
@@ -59,7 +59,8 @@ public class MainActivity extends Activity {
 					startActivity(new Intent(getApplicationContext(), ScanMp3Activity.class));
 					break;
 				case 2:
-					
+					//手电筒(开启闪光灯)
+                    FlashLightActivity.startActivity(MainActivity.this);
 					break;
 
 				default:
