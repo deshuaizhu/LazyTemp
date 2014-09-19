@@ -35,6 +35,7 @@ public class FlashLightActivity extends Activity implements SurfaceHolder.Callba
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_flashlight);
         initView();
+
     }
 
     private void init() {
@@ -53,46 +54,35 @@ public class FlashLightActivity extends Activity implements SurfaceHolder.Callba
     private void initView() {
         tb_switch = (ToggleButton)findViewById(R.id.toggleButton);
         surfaceview = (SurfaceView)findViewById(R.id.sv);
-        ViewGroup.LayoutParams localLayoutParams = surfaceview.getLayoutParams();
-        localLayoutParams.width = 1;
-        localLayoutParams.height = 1;
-        surfaceview.setLayoutParams(localLayoutParams);
-        surfaceview.setZOrderOnTop(true);
-        surfaceview.setBackgroundColor(-2);
         holder = surfaceview.getHolder();
         holder.addCallback(this);
-        holder.setFormat(-2);
         tb_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b){
-                    turn_on();
+                    OpenLightOn();
                 }else{
-                    turn_off();
+                    CloseLightOff();
                 }
             }
         });
     }
 
-    /**
-     * 关闭闪光灯
-     */
-    private void turn_off() {
+    private void OpenLightOn()    {
+       init();
+        Camera.Parameters parameters = m_Camera.getParameters();
+        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
+        m_Camera.setParameters(parameters);
+        m_Camera.startPreview();
+    }
+
+    private void CloseLightOff()   {
         if ( m_Camera != null )
         {
             m_Camera.stopPreview();
             m_Camera.release();
+            m_Camera = null;
         }
-    }
-
-    /**
-     * 打开闪光灯
-     */
-    private void turn_on() {
-        Camera.Parameters parameters = m_Camera.getParameters();
-        parameters.setFlashMode(Camera.Parameters.FLASH_MODE_TORCH);
-        m_Camera.setParameters( parameters );
-        m_Camera.startPreview();
     }
 
     /**
@@ -128,7 +118,11 @@ public class FlashLightActivity extends Activity implements SurfaceHolder.Callba
 
     @Override
     public void surfaceCreated(SurfaceHolder surfaceHolder) {
-
+       init();
+       /* m_Camera.autoFocus( new Camera.AutoFocusCallback (){
+            public void onAutoFocus(boolean success, Camera camera) {
+            }
+        });*/
     }
 
     @Override
@@ -138,7 +132,12 @@ public class FlashLightActivity extends Activity implements SurfaceHolder.Callba
 
     @Override
     public void surfaceDestroyed(SurfaceHolder surfaceHolder) {
-
+        if ( m_Camera != null )
+        {
+            m_Camera.stopPreview();
+            m_Camera.release();
+            m_Camera = null;
+        }
     }
 
     @Override
