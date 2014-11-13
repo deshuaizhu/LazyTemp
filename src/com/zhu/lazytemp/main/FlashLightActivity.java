@@ -1,15 +1,18 @@
 package com.zhu.lazytemp.main;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 import com.zhu.lazytemp.R;
+import com.zhu.lazytemp.utils.ToastUtil;
 
 import java.io.IOException;
 
@@ -32,6 +35,7 @@ public class FlashLightActivity extends Activity{
 
     }
 
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void init() {
         //准备工作
         if ( null == m_Camera )
@@ -66,6 +70,10 @@ public class FlashLightActivity extends Activity{
         tb_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(!checkCameraHardware()){
+                    ToastUtil.show("该设备没有闪光灯！");
+                    return;
+                }
                 if(b){
                     OpenLightOn();
                 }else{

@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 	 * 初始化数据
 	 */
 	private void initData() {
-		data = new String[]{"ViewPager动态增删","扫描手机中音频文件","手电筒"};
+		data = new String[]{"ViewPager动态增删","扫描手机中音频文件","手电筒","线性布局测试"};
 		adapter = new IndexDataAdapter(this,data);
 		lv.setAdapter(adapter);
 		
@@ -62,7 +62,10 @@ public class MainActivity extends Activity {
 					//手电筒(开启闪光灯)
                     FlashLightActivity.startActivity(MainActivity.this);
 					break;
-
+                case 3:
+                    //线性布局测试
+                    TestLinearLayoutActivity.startActivity(MainActivity.this);
+                    break;
 				default:
 					break;
 				}

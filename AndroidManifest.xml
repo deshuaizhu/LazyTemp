@@ -34,6 +34,9 @@
         <activity android:name="com.zhu.lazytemp.play.activity.MediaPlayActivity"></activity>
         <!--打开闪光灯-->
         <activity android:name=".main.FlashLightActivity"></activity>
+        <!--线性布局测试-->
+        <activity android:name=".main.TestLinearLayoutActivity"/>
+
         <!-- 音频播放服务 -->
         <service android:name="com.zhu.lazytemp.play.MediaService"></service>
     </application>
