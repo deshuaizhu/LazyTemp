@@ -20,7 +20,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.zhu.lazytemp.main.MainActivity"
+            android:name=".main.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,16 +29,19 @@
             </intent-filter>
         </activity>
         <!-- 扫描MP3 -->
-        <activity android:name="com.zhu.lazytemp.main.ScanMp3Activity"></activity>
+        <activity android:name=".main.ScanMp3Activity"></activity>
          <!-- 音频播放页面 -->
-        <activity android:name="com.zhu.lazytemp.play.activity.MediaPlayActivity"></activity>
+        <activity android:name=".play.activity.MediaPlayActivity"></activity>
         <!--打开闪光灯-->
         <activity android:name=".main.FlashLightActivity"></activity>
         <!--线性布局测试-->
         <activity android:name=".main.TestLinearLayoutActivity"/>
 
         <!-- 音频播放服务 -->
-        <service android:name="com.zhu.lazytemp.play.MediaService"></service>
+        <service android:name=".play.MediaService"></service>
+
+        <!--播放列表内容提供者-->
+        <provider android:authorities="com.zhu.lazytemp.PlayListContentProvider" android:name=".db.PlayListContentProvider"/>
     </application>
 
 </manifest>

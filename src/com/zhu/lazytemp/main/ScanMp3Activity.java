@@ -3,11 +3,9 @@ package com.zhu.lazytemp.main;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
+import android.content.*;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.MediaStore;
@@ -25,6 +23,8 @@ import com.zhu.lazytemp.bean.MediaInfo;
 import com.zhu.lazytemp.play.IMediaService;
 import com.zhu.lazytemp.play.MediaService;
 import com.zhu.lazytemp.play.activity.MediaPlayActivity;
+import com.zhu.lazytemp.utils.LazyConstant;
+
 /**
  * 扫描手机中的音频文件
  * @author zhu
@@ -95,6 +95,7 @@ public class ScanMp3Activity extends Activity implements OnClickListener, OnItem
 							MediaStore.Audio.Media.DEFAULT_SORT_ORDER);
 			while (cursor.moveToNext()) {
 				MediaInfo mediaInfo = new MediaInfo();
+                mediaInfo.setId(cursor.getString(0));
 				mediaInfo.setTitle(cursor.getString(1));
 				mediaInfo.setUrl(cursor.getString(2));
 				mediaInfo.setDuration(toTime(cursor.getInt(3)));
@@ -139,10 +140,46 @@ public class ScanMp3Activity extends Activity implements OnClickListener, OnItem
 	}
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        save2DB(mediaList);
 		MediaInfo mediaInfo = mediaList.get(position);
 		//跳转到播放器进行播放
 		Intent intent = new Intent(getApplicationContext(), MediaPlayActivity.class);
 		intent.putExtra("mediainfo", mediaInfo);
-		startActivity(intent );
+		startActivity(intent);
 	}
+
+    /**
+     * 将数据存入数据库
+     * @param mediaList
+     */
+    private void save2DB(final ArrayList<MediaInfo> mediaList) {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for (MediaInfo mediaInfo:mediaList){
+                    insertDB(mediaInfo);
+                }
+            }
+        }).start();
+
+
+    }
+
+    /**
+     * 插入一条记录
+     * @param mediaInfo
+     */
+    private void insertDB(MediaInfo mediaInfo) {
+        ContentValues values = new ContentValues();
+        values.put(LazyConstant.Database.Tb_PlayList.Field.FD_ID,mediaInfo.getId());
+        values.put(LazyConstant.Database.Tb_PlayList.Field.FD_ALBUM,mediaInfo.getAlbum());
+        values.put(LazyConstant.Database.Tb_PlayList.Field.FD_ARTIST,mediaInfo.getArtist());
+        values.put(LazyConstant.Database.Tb_PlayList.Field.FD_DURATION,mediaInfo.getDuration());
+        values.put(LazyConstant.Database.Tb_PlayList.Field.FD_SIZE,mediaInfo.getSize());
+        values.put(LazyConstant.Database.Tb_PlayList.Field.FD_TITLE,mediaInfo.getTitle());
+        values.put(LazyConstant.Database.Tb_PlayList.Field.FD_URL,mediaInfo.getUrl());
+        Uri uri = Uri.parse("content://com.zhu.lazytemp.PlayListContentProvider/insert");
+        getContentResolver().insert(uri,values);
+    }
 }

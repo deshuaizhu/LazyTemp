@@ -9,6 +9,8 @@ import java.io.Serializable;
  */
 public class MediaInfo implements Serializable  {
 	private static final long serialVersionUID = 1L;
+    /** 歌曲id */
+    private String id;
 	/** 歌曲名 */
 	private String title;
 	/** 专辑名*/
@@ -21,9 +23,16 @@ public class MediaInfo implements Serializable  {
 	private String duration;
 	/** 歌曲占用空间大小 */
 	private int size;
-	
-	
-	public String getTitle() {
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
 		return title;
 	}
 	public void setTitle(String title) {
