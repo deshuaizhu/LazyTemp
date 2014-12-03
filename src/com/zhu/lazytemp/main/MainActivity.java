@@ -53,7 +53,7 @@ public class MainActivity extends Activity {
 				switch (position) {
 				case 0:
 					//自定义注解
-					
+					AnnotationTestActivity.startActivity(MainActivity.this);
 					
 					break;
 				case 1:

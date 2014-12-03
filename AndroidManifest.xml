@@ -36,6 +36,8 @@
         <activity android:name=".main.FlashLightActivity"></activity>
         <!--线性布局测试-->
         <activity android:name=".main.TestLinearLayoutActivity"/>
+        <!--自定义注解测试-->
+        <activity android:name=".main.AnnotationTestActivity"/>
 
         <!-- 音频播放服务 -->
         <service android:name=".play.MediaService"></service>
