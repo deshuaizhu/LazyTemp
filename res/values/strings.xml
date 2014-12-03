@@ -4,5 +4,8 @@
     <string name="app_name">LazyTemp</string>
     <string name="hello_world">Hello world!</string>
     <string name="menu_settings">Settings</string>
+    
+    <!-- 音频播放 -->
+    <string name="player_medialist">音频列表</string>
 
 </resources>

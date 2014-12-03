@@ -3,11 +3,11 @@ package com.zhu.lazytemp.main;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.*;
+import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,13 +15,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.zhu.lazytemp.R;
 import com.zhu.lazytemp.adapter.Mp3FileAdapter;
 import com.zhu.lazytemp.bean.MediaInfo;
-import com.zhu.lazytemp.play.IMediaService;
-import com.zhu.lazytemp.play.MediaService;
 import com.zhu.lazytemp.play.activity.MediaPlayActivity;
 import com.zhu.lazytemp.utils.LazyConstant;
 
@@ -69,7 +66,7 @@ public class ScanMp3Activity extends Activity implements OnClickListener, OnItem
 		tv_title = (TextView)findViewById(R.id.tv_center);
 		tv_back = (TextView)findViewById(R.id.tv_left);
 		lv_show = (ListView)findViewById(R.id.lv_showmp3);
-		tv_title.setText("音频列表");
+		tv_title.setText(R.string.player_medialist);
 		tv_back.setOnClickListener(this);
 	}
 	

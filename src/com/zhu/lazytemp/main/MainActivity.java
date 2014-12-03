@@ -37,7 +37,7 @@ public class MainActivity extends Activity {
 	 * 初始化数据
 	 */
 	private void initData() {
-		data = new String[]{"ViewPager动态增删","扫描手机中音频文件","手电筒","线性布局测试"};
+		data = new String[]{"自定义注解","扫描手机中音频文件","手电筒","线性布局测试"};
 		adapter = new IndexDataAdapter(this,data);
 		lv.setAdapter(adapter);
 		
@@ -52,6 +52,8 @@ public class MainActivity extends Activity {
 				
 				switch (position) {
 				case 0:
+					//自定义注解
+					
 					
 					break;
 				case 1:
