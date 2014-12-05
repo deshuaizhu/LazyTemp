@@ -17,8 +17,8 @@ import com.zhu.lazytemp.utils.ViewUtils;
  *
  */
 @ContentView(value = R.layout.activity_annotation)
-public class AnnotationTestActivity extends Activity implements View.OnClickListener {
-    @FindView(value = R.id.button)
+public class AnnotationTestActivity extends Activity {
+    @FindView(value = R.id.button,click = "show")
     private Button btn;
     @FindView(value = R.id.textView)
     private TextView tv;
@@ -26,7 +26,7 @@ public class AnnotationTestActivity extends Activity implements View.OnClickList
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ViewUtils.injectObject(this,this);
-       btn.setOnClickListener(this);
+//        btn.setOnClickListener(this);
     }
 
 
@@ -35,12 +35,7 @@ public class AnnotationTestActivity extends Activity implements View.OnClickList
         context.startActivity(new Intent(context,AnnotationTestActivity.class));
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.button:
-                tv.setText("可以通过注解找到控件了！");
-                break;
-        }
+    public void show(View v) {
+         tv.setText("可以通过注解找到控件了！");
     }
 }

@@ -5,10 +5,8 @@
     android:orientation="horizontal" >
     
 	<com.zhu.lazytemp.widget.ScollerTextView 
-	    android:ellipsize="marquee"
 	    android:id="@+id/tv_name"
 	    android:textColor="#88000000"
-	    android:singleLine="true"
 	    android:padding="8dp"
 	    android:layout_weight="2"
 	    android:layout_width="0dp"

@@ -37,7 +37,12 @@ public class MainActivity extends Activity {
 	 * 初始化数据
 	 */
 	private void initData() {
-		data = new String[]{"自定义注解","扫描手机中音频文件","手电筒","线性布局测试"};
+		data = new String[]{
+				"自定义注解",
+				"扫描手机中音频文件",
+				"手电筒",
+				"线性布局测试",
+				"自定义滚动TextView"};
 		adapter = new IndexDataAdapter(this,data);
 		lv.setAdapter(adapter);
 		
@@ -68,6 +73,10 @@ public class MainActivity extends Activity {
                     //线性布局测试
                     TestLinearLayoutActivity.startActivity(MainActivity.this);
                     break;
+                case 4:
+                	//滚动TextView测试页面
+                	ScollerTextViewActivity.startActivity(MainActivity.this);
+                	break;
 				default:
 					break;
 				}

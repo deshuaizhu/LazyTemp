@@ -1,6 +1,7 @@
 package com.zhu.lazytemp.utils;
 
 import android.app.Activity;
+import android.text.TextUtils;
 import android.view.View;
 import com.zhu.lazytemp.annotation.ContentView;
 import com.zhu.lazytemp.annotation.FindView;
@@ -40,6 +41,7 @@ public class ViewUtils {
                 e.printStackTrace();
             }
         }
+        //解析属性上的注解
         Field[] fields = aClass.getDeclaredFields();
         if(fields != null && fields.length > 0){
             for(Field field:fields){
@@ -47,6 +49,7 @@ public class ViewUtils {
                 if(field.isAnnotationPresent(FindView.class)){
                     FindView annotation = field.getAnnotation(FindView.class);
                     int value = annotation.value();
+                    String clickName = annotation.click();
                     View viewById = activity.findViewById(value);
                     if(viewById != null){
                         field.setAccessible(true);
@@ -56,8 +59,20 @@ public class ViewUtils {
                             e.printStackTrace();
                         }
                     }
+                    if(!TextUtils.isEmpty(clickName)){
+                    	try {
+							Object object = field.get(obj);
+							if(object instanceof View){
+								((View)object).setOnClickListener(new EventListener(obj).click(clickName));
+							}
+						} catch (IllegalArgumentException e) {
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							e.printStackTrace();
+						}
+                    	
+                    }
                 }
-
             }
         }
 
